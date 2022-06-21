@@ -1,7 +1,8 @@
 <?php
     session_start();
+    
+    include_once("c_boutique.php");
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>  
@@ -11,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <link rel="stylesheet" href="../style/v_connexion.css">
+        <link rel="stylesheet" href="../style/v_boutique.css">
     </head>
     <body>
        
@@ -19,34 +20,25 @@
             <h1>SheeeshIT</h1>
         </header>
         <nav>
-            <ul id="c_menu">
+            <ul id="b_menu">
             <li><a href="../index.php">Accueil</a></li>
                 <li><a href="v_boutique.php">Boutique</a></li>
                 <li><a href="v_inscription.php">Inscription</a></li>
                 <li><a href="v_connexion.php">Connexion</a></li>
+                <li><a href="v_panier.php">Panier</a></li>
             </ul>
         </nav>
-        <div id="txtCo">
-            <p>Bon retour sur SheeeshIT</p>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <form action="../index.php?page=connexion" method="post">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" name="password" id="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Se connecter</button>
-                        </div>
-                    </form>
+        <?php foreach($Produits as $produit): ?>
+        <div class="col">
+            <div class="card">
+                <img src="<?php echo $produit->image; ?>" alt="<?php echo $produit->nom; ?>" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $produit->nom; ?></h5>
+                    <p class="card-text"><?php echo $produit->prix; ?>€</p>
+                    <a href="v_panier.php" class="btn btn-primary">Ajouter au panier</a>
                 </div>
             </div>
         </div>
+        <?php endforeach; ?>
     </body>
 </html>
